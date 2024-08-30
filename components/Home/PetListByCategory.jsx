@@ -42,6 +42,7 @@ export default function PetListByCategory() {
       /> 
 <Text>Hi</Text>
       <FlatList
+      horizontal={true}
       data={petList}
       renderItem={({item, index}) => (
         <PetListItem pet={item } />
