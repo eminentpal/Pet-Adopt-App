@@ -41,15 +41,24 @@ export default function RootLayout() {
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
     <Stack>
-      <Stack.Screen name="index" />
+      <Stack.Screen name="index"
+       options={{headerShown:false}}
+      />
       <Stack.Screen name="(tabs)" 
       options={{headerShown:false}}
       />
       <Stack.Screen name="login/index" 
-      
       options={{
         headerShown: false
       }}
+
+      />
+
+      {/* [tabs] was showing on the header thats why dx was added */}
+<Stack.Screen name="pet-details/index"  options={{
+        headerShown: false
+      }}
+      
       />
     </Stack>
   </ClerkProvider>

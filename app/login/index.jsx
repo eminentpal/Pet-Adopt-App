@@ -27,6 +27,7 @@ export default function LoginScreen  () {
   const { user } = useUser();
   const [sessionexist, setsessionexist] = useState(false)
   const { isSignedIn } = useAuth();
+  
 
   useWarmUpBrowser();
   const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })

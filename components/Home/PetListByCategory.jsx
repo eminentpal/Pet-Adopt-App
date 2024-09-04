@@ -8,6 +8,7 @@ import PetListItem from './PetListItem'
 export default function PetListByCategory() {
 
   const [petList, setPetList] = useState([])
+  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
     //We are passing in Birds category so it will be our default post list that will show on
@@ -18,9 +19,11 @@ export default function PetListByCategory() {
   //we use this to get pet list from firetore
   const GetPetList = async (category) => {
 
+    setLoader(true)
     //we set to empty array so cus in the forEach command we are 
     //pushing in new file, else we get duplicates.
     setPetList([])
+    
 
   const q = query (collection(db, 'Pets'),where('category','==',category))
   const querySnapshot = await getDocs(q)
@@ -30,19 +33,26 @@ export default function PetListByCategory() {
 
 
   })
+
+  setLoader(false)
 }
 
 
 
   return (
-    <View>
+    <View 
+  
+    >
       <Category
       // we pass in a function we are going to call in category component
       category={(value) =>GetPetList(value)}
       /> 
-<Text>Hi</Text>
+
       <FlatList
       horizontal={true}
+      refreshing={loader}
+      style={{marginTop:10}}
+      onRefresh={() => GetPetList('Birds')}
       data={petList}
       renderItem={({item, index}) => (
         <PetListItem pet={item } />
