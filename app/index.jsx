@@ -9,9 +9,9 @@ export default function Index() {
   /// we use this to get user that is currently signed in
   const { isSignedIn, user, isLoaded } = useUser()
 
-  const auth = getAuth()
+  // const auth = getAuth()
 
-  const activeUser = auth.currentUser;
+  // const activeUser = auth.currentUser;
 
  
 
@@ -37,9 +37,9 @@ export default function Index() {
     >
 
 
-   {/* { user || isSignedIn ?  */}
+   { user || isSignedIn ? 
 
-{  activeUser ? 
+/* {  activeUser ?  */
    
    <Redirect href={'/(tabs)/home'} /> 
    :
