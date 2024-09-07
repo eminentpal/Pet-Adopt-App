@@ -22,6 +22,8 @@ export default function MarkFav({pet, color='black'}) {
     
     }, [user])
 
+  
+
     const GetFav = async () => {
         
        const result = await Shared.GetFavList(user)

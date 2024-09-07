@@ -16,7 +16,7 @@ export default function OwnerInfo({pet}) {
             gap:20
         }}
         >
-      <Image source={{uri:pet?.user[1]}}
+      <Image source={{uri:pet?.userImage}}
       style={{
        width: 50,
        height:50,
@@ -30,7 +30,7 @@ export default function OwnerInfo({pet}) {
         fontFamily: 'outfit-medium',
         fontSize: 17,
       }}
-      >{pet?.user}</Text>
+      >{pet?.username}</Text>
         
         <Text
         style={{

@@ -9,7 +9,7 @@ import PetListItem from './../../components/Home/PetListItem'
 export default function Favorite() {
 
   const user = useUser()
-
+ const [loader, setloader] = useState(false)
   const [favIds, setfavIds] = useState([])
   const [favPetList, setFavPetList] = useState([])
 
@@ -21,20 +21,24 @@ export default function Favorite() {
 
 //fetch fav ids
 
-const GetFavPetIds = async () =>{
-
+const GetFavPetIds = async () => {
+  setloader(true)
   const result = await Shared.GetFavList(user);
+  console.log({G:favIds})
   setfavIds(result?.favorites)
+  setloader(false)
+    GetFavPetList(result?.favorites)
+  
 
-  GetFavPetList()
 }
 
  //Fetch Related Pet List
 
- const GetFavPetList = async () => {
-
+ const GetFavPetList = async (favId_) => {
+  setloader(true)
   setFavPetList([])
-  const q= query(collection(db, 'Pets'),where('id','in', favIds))
+ 
+  const q= query(collection(db, 'Pets'),where('id','in', favId_))
 
 
   const querySnapshot = await getDocs(q)
@@ -45,11 +49,10 @@ const GetFavPetIds = async () =>{
     console.log(favPetList);
 
   })
-
+  setloader(false)
 
 
  }
-
 
 
   return (
@@ -64,6 +67,9 @@ const GetFavPetIds = async () =>{
 
       <FlatList
       data={favPetList}
+      numColumns={2}
+      onRefresh={GetFavPetIds}
+      refreshing={loader}
       renderItem={({item,index}) => (
         <View>
         <PetListItem pet={item}/>
